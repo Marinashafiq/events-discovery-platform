@@ -1,0 +1,102 @@
+{
+  "common": {
+    "search": "Search events...",
+    "filter": "Filter",
+    "clear": "Clear",
+    "apply": "Apply",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "viewDetails": "View Details",
+    "bookTicket": "Book Ticket",
+    "back": "Back",
+    "print": "Print",
+    "noResults": "No results found",
+    "page": "Page",
+    "of": "of",
+    "next": "Next",
+    "previous": "Previous",
+    "loadMore": "Load More",
+    "loadingMore": "Loading...",
+    "noMoreEvents": "No more events to load",
+    "home": "Home",
+    "myTickets": "My Tickets",
+    "free": "Free"
+  },
+  "events": {
+    "title": "Discover Events",
+    "upcomingEvents": "Upcoming Events",
+    "featuredEvents": "Featured Events",
+    "allEvents": "All Events",
+    "searchPlaceholder": "Search by event name...",
+    "filters": {
+      "title": "Filters",
+      "category": "Category",
+      "location": "Location",
+      "dateFrom": "Date From",
+      "dateTo": "Date To",
+      "featured": "Featured Only",
+      "allCategories": "All Categories",
+      "allLocations": "All Locations"
+    },
+    "details": {
+      "date": "Date",
+      "time": "Time",
+      "location": "Location",
+      "organizer": "Organizer",
+      "price": "Price",
+      "free": "Free",
+      "attendees": "Attendees",
+      "category": "Category",
+      "tags": "Tags",
+      "description": "Description",
+      "bookNow": "Book Now"
+    }
+  },
+  "booking": {
+    "title": "Book Ticket",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "mobile": "Mobile Number",
+      "mobilePlaceholder": "Enter your mobile number",
+      "date": "Preferred Date",
+      "datePlaceholder": "Select date",
+      "submit": "Confirm Booking",
+      "submitting": "Processing..."
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "mobileRequired": "Mobile number is required",
+      "mobileInvalid": "Please enter a valid mobile number",
+      "dateRequired": "Date is required"
+    },
+    "success": {
+      "title": "Booking Successful!",
+      "message": "Your ticket has been booked successfully. You will receive a confirmation email shortly.",
+      "close": "Close"
+    },
+    "error": {
+      "title": "Booking Failed",
+      "message": "We encountered an error processing your booking. Please try again.",
+      "close": "Close"
+    }
+  },
+  "tickets": {
+    "title": "My Tickets",
+    "noTickets": "You haven't booked any tickets yet.",
+    "table": {
+      "event": "Event",
+      "date": "Date",
+      "location": "Location",
+      "attendee": "Attendee",
+      "price": "Price",
+      "actions": "Actions"
+    }
+  }
+}
+

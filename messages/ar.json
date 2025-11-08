@@ -1,0 +1,102 @@
+{
+  "common": {
+    "search": "البحث عن الأحداث...",
+    "filter": "تصفية",
+    "clear": "مسح",
+    "apply": "تطبيق",
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "viewDetails": "عرض التفاصيل",
+    "bookTicket": "حجز تذكرة",
+    "back": "رجوع",
+    "print": "طباعة",
+    "noResults": "لم يتم العثور على نتائج",
+    "page": "صفحة",
+    "of": "من",
+    "next": "التالي",
+    "previous": "السابق",
+    "loadMore": "تحميل المزيد",
+    "loadingMore": "جاري التحميل...",
+    "noMoreEvents": "لا توجد أحداث أخرى للتحميل",
+    "home": "الرئيسية",
+    "myTickets": "تذاكري",
+    "free": "مجاني"
+  },
+  "events": {
+    "title": "استكشف الأحداث",
+    "upcomingEvents": "الأحداث القادمة",
+    "featuredEvents": "الأحداث المميزة",
+    "allEvents": "جميع الأحداث",
+    "searchPlaceholder": "البحث حسب اسم الحدث...",
+    "filters": {
+      "title": "المرشحات",
+      "category": "الفئة",
+      "location": "الموقع",
+      "dateFrom": "من تاريخ",
+      "dateTo": "إلى تاريخ",
+      "featured": "المميزة فقط",
+      "allCategories": "جميع الفئات",
+      "allLocations": "جميع المواقع"
+    },
+    "details": {
+      "date": "التاريخ",
+      "time": "الوقت",
+      "location": "الموقع",
+      "organizer": "المنظم",
+      "price": "السعر",
+      "free": "مجاني",
+      "attendees": "الحضور",
+      "category": "الفئة",
+      "tags": "العلامات",
+      "description": "الوصف",
+      "bookNow": "احجز الآن"
+    }
+  },
+  "booking": {
+    "title": "حجز تذكرة",
+    "form": {
+      "name": "الاسم الكامل",
+      "namePlaceholder": "أدخل اسمك الكامل",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "mobile": "رقم الهاتف",
+      "mobilePlaceholder": "أدخل رقم هاتفك",
+      "date": "التاريخ المفضل",
+      "datePlaceholder": "اختر التاريخ",
+      "submit": "تأكيد الحجز",
+      "submitting": "جاري المعالجة..."
+    },
+    "validation": {
+      "nameRequired": "الاسم مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+      "mobileRequired": "رقم الهاتف مطلوب",
+      "mobileInvalid": "يرجى إدخال رقم هاتف صالح",
+      "dateRequired": "التاريخ مطلوب"
+    },
+    "success": {
+      "title": "تم الحجز بنجاح!",
+      "message": "تم حجز تذكرتك بنجاح. ستصلك رسالة تأكيد عبر البريد الإلكتروني قريباً.",
+      "close": "إغلاق"
+    },
+    "error": {
+      "title": "فشل الحجز",
+      "message": "حدث خطأ أثناء معالجة حجزك. يرجى المحاولة مرة أخرى.",
+      "close": "إغلاق"
+    }
+  },
+  "tickets": {
+    "title": "تذاكري",
+    "noTickets": "لم تقم بحجز أي تذاكر بعد.",
+    "table": {
+      "event": "الحدث",
+      "date": "التاريخ",
+      "location": "الموقع",
+      "attendee": "الحاضر",
+      "price": "السعر",
+      "actions": "الإجراءات"
+    }
+  }
+}
+
