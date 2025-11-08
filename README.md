@@ -20,7 +20,7 @@ A modern, multilingual events discovery and booking platform built with Next.js 
 - **Internationalization**: next-intl 4.4.0
 - **Form Handling**: React Hook Form + Zod validation
 - **Date Handling**: date-fns with locale support
-- **Fonts**: Geist Sans, Geist Mono, Poppins (English), Tajawal (Arabic)
+- **Fonts**: Poppins (English), Tajawal (Arabic)
 
 ## Prerequisites
 
