@@ -1,24 +1,22 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { useLayoutEffect } from 'react';
-import { locales, defaultLocale, type Locale } from '@/i18n';
+import { useLocale } from 'next-intl';
 
-export function LocaleHtml({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  
+export default function LocaleHtml() {
+  const locale = useLocale();
+
+  // This ensures the direction changes immediately on client-side navigation
   useLayoutEffect(() => {
-    // Extract locale from pathname
-    const pathSegments = pathname.split('/').filter(Boolean);
-    const locale = (pathSegments[0] as Locale) || defaultLocale;
+    const html = document.documentElement;
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
     
-    if (locales.includes(locale)) {
-      const html = document.documentElement;
+    if (html.getAttribute('lang') !== locale || html.getAttribute('dir') !== dir) {
       html.setAttribute('lang', locale);
-      html.setAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr');
+      html.setAttribute('dir', dir);
     }
-  }, [pathname]);
+  }, [locale]);
 
-  return <>{children}</>;
+  return null;
 }
 
