@@ -1,4 +1,4 @@
-import { Ticket } from '@/types/event';
+import { Ticket } from '@/types/ticket';
 
 interface PrintTicketOptions {
   formatDate: (date: Date) => string;
