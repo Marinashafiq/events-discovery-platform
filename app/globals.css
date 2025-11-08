@@ -10,6 +10,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-poppins: var(--font-poppins);
+  --font-tajawal: var(--font-tajawal);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +24,19 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), sans-serif;
+}
+
+/* This prevents flash of incorrect direction on page load */
+body:not([data-direction-set]) {
+  visibility: hidden;
+}
+
+body[data-direction-set] {
+  visibility: visible;
+}
+
+html[lang="ar"] body,
+html[dir="rtl"] body {
+  font-family: var(--font-tajawal), sans-serif;
 }

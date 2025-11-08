@@ -1,14 +1,32 @@
-import { locales, type Locale } from "@/i18n";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { routing } from '../../i18n/routing';
+import type { Locale } from '../../types/locale';
+import LocaleHtml from '@/components/LocaleHtml';
+import Navigation from '@/components/Navigation';
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
-
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
-  return <>{children}</>;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
+  if (!routing.locales.includes(locale as Locale)) {
+    notFound();
+  }
+
+  const messages = await getMessages();
+
+  return (
+    <NextIntlClientProvider messages={messages}>
+      <LocaleHtml />
+      <Navigation />
+      {children}
+    </NextIntlClientProvider>
+  );
 }
 
