@@ -27,6 +27,16 @@ const tajawal = Tajawal({
 export const metadata: Metadata = {
   title: "Events Discovery Platform",
   description: "Discover and book amazing events in your area",
+  icons: {
+    icon: '/favicon.ico',
+    apple: [
+      {
+        url: '/apple-touch-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
