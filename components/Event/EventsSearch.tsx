@@ -27,7 +27,7 @@ export default function EventsSearch({ initialSearch }: EventsSearchProps) {
       clearTimeout(debounceTimerRef.current);
     }
     
-    // Debounce the URL update
+    // Debounce the URL update for search
     debounceTimerRef.current = setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
       if (value.trim()) {

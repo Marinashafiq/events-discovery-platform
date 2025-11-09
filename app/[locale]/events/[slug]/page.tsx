@@ -8,6 +8,7 @@ import { generatePageMetadata } from '@/lib/utils/metadata';
 import { buildEventSchema } from '@/lib/utils/structuredData';
 import { getBlurDataURL } from '@/lib/utils/blurPlaceholder';
 import { formatLongDate, formatTime } from '@/lib/utils/dateFormat';
+import StructuredData from '@/components/StructuredData';
 
 interface EventDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -78,10 +79,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={structuredData} />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <I18nLink

@@ -5,6 +5,7 @@ import { getEventBySlug } from '@/lib/api/events';
 import BookingForm from '@/components/Booking/BookingForm';
 import { Link as I18nLink } from '@/i18n/routing';
 import { generatePageMetadata } from '@/lib/utils/metadata';
+import StructuredData from '@/components/StructuredData';
 import { buildReservationActionSchema } from '@/lib/utils/structuredData';
 
 interface BookTicketPageProps {
@@ -67,10 +68,7 @@ export default async function BookTicketPage({ params }: BookTicketPageProps) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={structuredData} />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <I18nLink

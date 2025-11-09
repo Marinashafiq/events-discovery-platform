@@ -5,6 +5,7 @@ import EventsSearch from '@/components/Event/EventsSearch';
 import EventFiltersServer from '@/components/Event/EventFiltersServer';
 import EventsGridServer from '@/components/Event/EventsGridServer';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
+import StructuredData from '@/components/StructuredData';
 import { getEvents } from '@/lib/api/events';
 import { generatePageMetadata } from '@/lib/utils/metadata';
 import { buildCollectionPageSchema } from '@/lib/utils/structuredData';
@@ -18,7 +19,6 @@ export async function generateMetadata({ params }: EventsPageProps): Promise<Met
   const { locale } = await params;
   const t = await getTranslations('events');
   
-  // Get some events for structured data
   const eventsData = await getEvents({}, { page: 1, limit: 6 });
   
   const title = `${t('title')} | Events Platform`;
@@ -88,10 +88,7 @@ export default async function EventsPage({ params, searchParams }: EventsPagePro
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={structuredData} />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">

@@ -14,13 +14,13 @@ interface EventsGridProps {
 
 export default function EventsGrid({ initialEvents, initialFilters, initialPage }: EventsGridProps) {
   const t = useTranslations('common');
-  // Use server-provided events directly, no client-side refetch on filter changes
+  // Use server-provided events directly
   const [allEvents, setAllEvents] = useState(initialEvents.events);
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(initialEvents.page < initialEvents.totalPages);
 
-  // Sync with server-provided data when filters change (server re-renders with new data)
+  // Sync with server-provided data when filters change 
   useEffect(() => {
     setAllEvents(initialEvents.events);
     setCurrentPage(initialPage);
@@ -35,7 +35,6 @@ export default function EventsGrid({ initialEvents, initialFilters, initialPage 
     if (f.location && f.location.trim()) normalized.location = f.location.trim();
     if (f.dateFrom) normalized.dateFrom = f.dateFrom;
     if (f.dateTo) normalized.dateTo = f.dateTo;
-    if (f.featured !== undefined) normalized.featured = f.featured;
     return normalized;
   };
 

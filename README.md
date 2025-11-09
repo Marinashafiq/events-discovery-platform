@@ -9,7 +9,8 @@ A modern, multilingual events discovery and booking platform built with Next.js 
 - 🌍 **Internationalization**: Full support for English and Arabic (RTL)
 - 📱 **Responsive Design**: Mobile-first design with collapsible navigation
 - 🔐 **SEO Optimized**: Dynamic metadata, Open Graph, Twitter Cards, and structured data
-- ⚡ **Performance**: Server-side rendering, optimized images, and code splitting
+- ⚡ **Performance**: Server-side rendering, optimized images with blur placeholders, and code splitting
+- 🎨 **Image Optimization**: Blur placeholders for smooth loading experience
 - 🎯 **Type Safety**: Full TypeScript with strict mode enabled
 
 ## Tech Stack
@@ -111,7 +112,8 @@ events-discovery-platform/
 │   ├── ErrorAlert.tsx           # Reusable error alert component
 │   ├── LoadingSkeleton.tsx      # Loading state component
 │   ├── LocaleHtml.tsx           # Client component for locale attributes
-│   └── Navigation.tsx            # Main navigation with mobile menu
+│   ├── Navigation.tsx            # Main navigation with mobile menu
+│   └── StructuredData.tsx       # JSON-LD structured data component
 ├── lib/
 │   ├── api/                      # Mock API layer
 │   │   ├── events.ts            # Event data fetching and filtering
@@ -168,6 +170,7 @@ events-discovery-platform/
 - **RTL Support**: Full right-to-left layout for Arabic
 - **Direction Management**: Prevents FOUC with inline blocking script
 - **Locale-aware Metadata**: Different metadata for each language
+- **Locale-aware Date Formatting**: Automatic Arabic/English date formatting using date-fns locales
 
 ### State Management
 
@@ -183,13 +186,13 @@ events-discovery-platform/
 - **Collapsible Navigation**: Burger menu on mobile
 - **Flexible Grids**: 1 column (mobile) → 3 columns (desktop)
 - **RTL-aware**: Proper spacing for both LTR and RTL
-
+- **Image Optimization**: Responsive image sizes with blur placeholders
 
 ## TypeScript
 
 The project uses TypeScript with strict mode enabled. All components, functions, and data structures are fully typed. No `any` types are used.
 
-## Translation and Utilis 
+## Translation and Utilities 
 
 ### Reusable Utilities
 
@@ -203,8 +206,9 @@ The project includes several reusable utility modules:
   - `buildTicketsCollectionPageSchema()` - Tickets listing page schema
   - Helper functions for Place, Organization, and Offer schemas
 - **`lib/utils/dateFormat.ts`**: Locale-aware date formatting utilities using date-fns:
-  - `formatLongDate()` - Long date with day name (e.g., "Monday, January 15, 2024")
-  - `formatTime()` - 12-hour time format (e.g., "2:30 PM")
+  - `formatLongDate()` - Long date format (e.g., "January 15, 2024" or "15 يناير 2024")
+  - `formatTime()` - 12-hour time format (e.g., "2:30 PM" or "2:30 م")
+  - Uses date-fns locale support for automatic Arabic formatting
 - **`lib/utils/blurPlaceholder.ts`**: Blur placeholder generator for Next.js Image components to improve perceived performance
 - **`lib/utils/ticketPrint.ts`**: Ticket printing functionality
 

@@ -14,7 +14,6 @@ interface EventCardProps {
 
 export default function EventCard({ event }: EventCardProps) {
   const t = useTranslations('events.details');
-  const tCommon = useTranslations('common');
   const locale = useLocale() as 'en' | 'ar';
 
   const formatDate = (date: Date) => formatLongDate(date, locale);

@@ -5,6 +5,7 @@ import { getTickets } from '@/lib/api/tickets';
 import { generatePageMetadata } from '@/lib/utils/metadata';
 import TicketsTable from '@/components/Tickets/TicketsTable';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
+import StructuredData from '@/components/StructuredData';
 import { buildTicketsCollectionPageSchema } from '@/lib/utils/structuredData';
 
 interface TicketsPageProps {
@@ -75,10 +76,7 @@ export default async function TicketsPage({ params }: TicketsPageProps) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={structuredData} />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">
