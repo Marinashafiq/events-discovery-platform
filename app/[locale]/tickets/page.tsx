@@ -5,6 +5,7 @@ import { getTickets } from '@/lib/api/tickets';
 import { generatePageMetadata } from '@/lib/utils/metadata';
 import TicketsTable from '@/components/Tickets/TicketsTable';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
+import { buildTicketsCollectionPageSchema } from '@/lib/utils/structuredData';
 
 interface TicketsPageProps {
   params: Promise<{ locale: string }>;
@@ -56,30 +57,21 @@ async function TicketsContent() {
 export default async function TicketsPage({ params }: TicketsPageProps) {
   const { locale } = await params;
   const t = await getTranslations('tickets');
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://example.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
   const tickets = await getTickets();
 
   // Structured data (JSON-LD) for tickets page
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: t('title'),
-    description: 'View and manage your event tickets',
-    url: `${baseUrl}/${locale}/tickets`,
-    mainEntity: {
-      '@type': 'ItemList',
-      numberOfItems: tickets.length,
-      itemListElement: tickets.slice(0, 10).map((ticket, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'Ticket',
-          name: `Ticket for ${ticket.eventTitle}`,
-          description: `Ticket for ${ticket.eventTitle} on ${ticket.eventDate.toISOString().split('T')[0]}`,
-        },
-      })),
-    },
-  };
+  const structuredData = buildTicketsCollectionPageSchema(
+    tickets,
+    locale,
+    baseUrl,
+    {
+      name: t('title'),
+      description: 'View and manage your event tickets',
+      url: `${baseUrl}/${locale}/tickets`,
+      maxItems: 10,
+    }
+  );
 
   return (
     <>

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://example.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
 
   const disallowPaths = [
     '/_next/',           // Next.js internal files

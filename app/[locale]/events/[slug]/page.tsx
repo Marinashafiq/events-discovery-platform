@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { getEventBySlug } from '@/lib/api/events';
 import { Link as I18nLink } from '@/i18n/routing';
 import { generatePageMetadata } from '@/lib/utils/metadata';
+import { buildEventSchema } from '@/lib/utils/structuredData';
 
 interface EventDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -88,46 +89,17 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
   };
 
   const locationString = `${event.location.venue}, ${event.location.city}, ${event.location.state}, ${event.location.country}`;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://example.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
 
   // Structured data (JSON-LD)
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Event',
-    name: event.title,
-    description: event.description,
-    startDate: event.date.toISOString(),
-    endDate: event.endDate?.toISOString() || event.date.toISOString(),
-    eventStatus: 'https://schema.org/EventScheduled',
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    location: {
-      '@type': 'Place',
-      name: event.location.venue,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: event.location.venue,
-        addressLocality: event.location.city,
-        addressRegion: event.location.state,
-        addressCountry: event.location.country,
-      },
-    },
-    image: event.imageUrl,
-    organizer: {
-      '@type': 'Organization',
-      name: event.organizer.name,
-    },
-    offers: {
-      '@type': 'Offer',
-      price: event.price === 'free' ? '0' : event.price.toString(),
-      priceCurrency: 'USD',
-      availability: event.attendeeCount < event.maxAttendees ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
-      url: `${baseUrl}/${locale}/events/${event.slug}/book`,
-      validFrom: event.createdAt.toISOString(),
-    },
-    performer: {
-      '@type': 'Organization',
-      name: event.organizer.name,
-    },
+    ...buildEventSchema(event, locale, baseUrl, {
+      includeEventStatus: true,
+      includeEventAttendanceMode: true,
+      includePerformer: true,
+      includeValidFrom: true,
+    }),
   };
 
   return (

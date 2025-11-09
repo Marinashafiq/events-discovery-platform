@@ -7,6 +7,7 @@ import EventsGridServer from '@/components/Event/EventsGridServer';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import { getEvents } from '@/lib/api/events';
 import { generatePageMetadata } from '@/lib/utils/metadata';
+import { buildCollectionPageSchema } from '@/lib/utils/structuredData';
 
 interface EventsPageProps {
   params: Promise<{ locale: string }>;
@@ -68,49 +69,22 @@ export default async function EventsPage({ params, searchParams }: EventsPagePro
     ...(dateTo && { dateTo }),
   };
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://example.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
   const eventsData = await getEvents(filters, { page: 1, limit: 6 });
 
   // Structured data (JSON-LD) for EventCollection
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: t('title'),
-    description: t('upcomingEvents'),
-    url: `${baseUrl}/${locale}/events`,
-    mainEntity: {
-      '@type': 'ItemList',
-      numberOfItems: eventsData.total,
-      itemListElement: eventsData.events.slice(0, 10).map((event, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'Event',
-          name: event.title,
-          description: event.description,
-          startDate: event.date.toISOString(),
-          endDate: event.endDate?.toISOString() || event.date.toISOString(),
-          location: {
-            '@type': 'Place',
-            name: event.location.venue,
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: event.location.city,
-              addressRegion: event.location.state,
-              addressCountry: event.location.country,
-            },
-          },
-          image: event.imageUrl,
-          offers: {
-            '@type': 'Offer',
-            price: event.price === 'free' ? '0' : event.price.toString(),
-            priceCurrency: 'USD',
-            url: `${baseUrl}/${locale}/events/${event.slug}/book`,
-          },
-        },
-      })),
-    },
-  };
+  const structuredData = buildCollectionPageSchema(
+    eventsData.events,
+    eventsData.total,
+    locale,
+    baseUrl,
+    {
+      name: t('title'),
+      description: t('upcomingEvents'),
+      url: `${baseUrl}/${locale}/events`,
+      maxItems: 10,
+    }
+  );
 
   return (
     <>

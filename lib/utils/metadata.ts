@@ -27,7 +27,7 @@ export function generatePageMetadata(options: GenerateMetadataOptions): Metadata
     siteName = 'Events Platform',
   } = options;
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://example.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
   const ogLocale = locale === 'ar' ? 'ar_SA' : 'en_US';
   
   const absoluteImageUrl = imageUrl

@@ -5,6 +5,7 @@ import { getEventBySlug } from '@/lib/api/events';
 import BookingForm from '@/components/Booking/BookingForm';
 import { Link as I18nLink } from '@/i18n/routing';
 import { generatePageMetadata } from '@/lib/utils/metadata';
+import { buildReservationActionSchema } from '@/lib/utils/structuredData';
 
 interface BookTicketPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -59,52 +60,10 @@ export default async function BookTicketPage({ params }: BookTicketPageProps) {
     notFound();
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://example.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
 
   // Structured data (JSON-LD) for SEO
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'ReservationAction',
-    target: {
-      '@type': 'EventReservation',
-      reservationFor: {
-        '@type': 'Event',
-        name: event.title,
-        description: event.description,
-        startDate: event.date.toISOString(),
-        endDate: event.endDate?.toISOString() || event.date.toISOString(),
-        location: {
-          '@type': 'Place',
-          name: event.location.venue,
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: event.location.venue,
-            addressLocality: event.location.city,
-            addressRegion: event.location.state,
-            addressCountry: event.location.country,
-          },
-        },
-        image: event.imageUrl,
-        organizer: {
-          '@type': 'Organization',
-          name: event.organizer.name,
-        },
-        offers: {
-          '@type': 'Offer',
-          price: event.price === 'free' ? '0' : event.price.toString(),
-          priceCurrency: 'USD',
-          availability: event.attendeeCount < event.maxAttendees 
-            ? 'https://schema.org/InStock' 
-            : 'https://schema.org/SoldOut',
-          url: `${baseUrl}/${locale}/events/${slug}/book`,
-        },
-      },
-    },
-    object: {
-      '@type': 'Ticket',
-      name: `Ticket for ${event.title}`,
-    },
-  };
+  const structuredData = buildReservationActionSchema(event, locale, baseUrl);
 
   return (
     <>
