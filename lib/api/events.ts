@@ -1,7 +1,6 @@
 import { Event, EventsResponse, EventFilters, PaginationParams } from '@/types/event';
 import { eventsWithDates } from '@/data/mockEvents';
 
-// Simulate API delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function getEvents(

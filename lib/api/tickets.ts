@@ -3,7 +3,6 @@ import { BookingFormData } from '@/types/booking';
 import { mockTickets } from '@/data/mockTickets';
 import { getEventBySlug } from './events';
 
-// Simulate API delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function getTickets(): Promise<Ticket[]> {
@@ -17,13 +16,6 @@ export async function bookTicket(
 ): Promise<{ success: boolean; ticket?: Ticket; error?: string }> {
   await delay(1500); // Simulate API delay
 
-  // Simulate occasional API failures (10% chance)
-  if (Math.random() < 0.1) {
-    return {
-      success: false,
-      error: 'Network error. Please try again later.',
-    };
-  }
 
   const event = await getEventBySlug(eventSlug);
   if (!event) {
@@ -56,8 +48,6 @@ export async function bookTicket(
     price: event.price,
   };
 
-  // In a real app, this would be saved to a database
-  // For now, we just return success
 
   return {
     success: true,
