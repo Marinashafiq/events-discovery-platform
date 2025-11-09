@@ -1,11 +1,15 @@
 import { MetadataRoute } from 'next';
-import { eventsWithDates } from '@/data/mockEvents';
+import { getEvents } from '@/lib/api/events';
 import { routing } from '@/i18n/routing';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ;
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
   
   const routes: MetadataRoute.Sitemap = [];
+
+  // Fetch all events for sitemap 
+  const eventsData = await getEvents({}, { page: 1, limit: 1000 });
+  const allEvents = eventsData.events;
 
   // Add locale-specific main routes
   routing.locales.forEach((locale) => {
@@ -26,8 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // Add event detail pages
-  eventsWithDates.forEach((event) => {
+  // Add event detail pages dynamically based on available events
+  allEvents.forEach((event) => {
     routing.locales.forEach((locale) => {
       // Event detail page (high priority for SEO)
       routes.push({
