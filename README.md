@@ -118,6 +118,7 @@ events-discovery-platform/
 │   │   └── tickets.ts           # Ticket operations
 │   └── utils/                   # Utility functions
 │       ├── metadata.ts          # Reusable metadata generator
+│       ├── structuredData.ts    # Reusable schema.org structured data builders
 │       └── ticketPrint.ts       # Ticket printing utility
 ├── data/                         # Mock data
 │   ├── mockEvents.ts            # Event data
@@ -153,10 +154,12 @@ events-discovery-platform/
 ### SEO Optimization
 
 - **Dynamic Metadata**: Each page generates metadata using `generateMetadata` function
-- **Structured Data**: JSON-LD schema markup for events
+- **Structured Data**: Reusable JSON-LD schema markup utilities for events, tickets, and reservations
+- **Schema.org Support**: Event, EventReservation, ReservationAction, CollectionPage, and Ticket schemas
 - **Sitemap**: Dynamic sitemap.xml generated from event data
 - **Robots.txt**: Proper crawling rules configured
 - **Open Graph & Twitter Cards**: Social media preview support
+- **Apple Touch Icon**: Proper iOS home screen icon support
 
 ### Internationalization
 
@@ -184,4 +187,29 @@ events-discovery-platform/
 ## TypeScript
 
 The project uses TypeScript with strict mode enabled. All components, functions, and data structures are fully typed. No `any` types are used.
+
+## Code Organization
+
+### Reusable Utilities
+
+The project includes several reusable utility modules:
+
+- **`lib/utils/metadata.ts`**: Centralized metadata generation for all pages with Open Graph and Twitter Card support
+- **`lib/utils/structuredData.ts`**: Reusable schema.org structured data builders:
+  - `buildEventSchema()` - Event schema with configurable options
+  - `buildReservationActionSchema()` - Booking page schema
+  - `buildCollectionPageSchema()` - Events listing page schema
+  - `buildTicketsCollectionPageSchema()` - Tickets listing page schema
+  - Helper functions for Place, Organization, and Offer schemas
+- **`lib/utils/ticketPrint.ts`**: Ticket printing functionality
+
+### Translation Structure
+
+Translations are organized by namespace in JSON files:
+- `common` - Shared UI elements (buttons, labels)
+- `events` - Event-related content (listing, details, filters)
+- `booking` - Booking form and validation messages
+- `tickets` - Ticket management interface
+
+All user-facing content is fully translatable, including SEO-optimized paragraphs and descriptions.
 
