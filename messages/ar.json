@@ -56,7 +56,8 @@
       "category": "الفئة",
       "tags": "العلامات",
       "description": "الوصف",
-      "bookNow": "احجز الآن"
+      "bookNow": "احجز الآن",
+      "featured": "مميز"
     }
   },
   "booking": {

@@ -56,7 +56,8 @@
       "category": "Category",
       "tags": "Tags",
       "description": "Description",
-      "bookNow": "Book Now"
+      "bookNow": "Book Now",
+      "featured": "Featured"
     }
   },
   "booking": {

@@ -106,7 +106,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
               />
               {event.featured && (
                 <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded text-sm font-semibold">
-                  Featured
+                  {t('featured')}
                 </div>
               )}
             </div>
