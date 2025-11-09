@@ -1,9 +1,9 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { format } from 'date-fns';
 import { Ticket } from '@/types/ticket';
 import { printTicket } from '@/lib/utils/ticketPrint';
+import { formatLongDate } from '@/lib/utils/dateFormat';
 
 interface TicketsTableProps {
   tickets: Ticket[];
@@ -12,20 +12,9 @@ interface TicketsTableProps {
 export default function TicketsTable({ tickets }: TicketsTableProps) {
   const t = useTranslations('tickets.table');
   const tCommon = useTranslations('common');
-  const locale = useLocale();
+  const locale = useLocale() as 'en' | 'ar';
 
-  const formatDate = (date: Date) => {
-    try {
-      if (locale === 'ar') {
-        const d = new Date(date);
-        const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-        return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-      }
-      return format(date, 'MMM d, yyyy');
-    } catch {
-      return date.toLocaleDateString();
-    }
-  };
+  const formatDate = (date: Date) => formatLongDate(date, locale);
 
   const formatPrice = (price: number | 'free') => {
     if (price === 'free') return tCommon('free');

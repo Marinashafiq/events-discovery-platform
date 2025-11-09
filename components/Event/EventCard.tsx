@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { format } from 'date-fns';
 import { Event } from '@/types/event';
 import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { getBlurDataURL } from '@/lib/utils/blurPlaceholder';
+import { formatLongDate } from '@/lib/utils/dateFormat';
 
 interface EventCardProps {
   event: Event;
@@ -15,21 +15,9 @@ interface EventCardProps {
 export default function EventCard({ event }: EventCardProps) {
   const t = useTranslations('events.details');
   const tCommon = useTranslations('common');
-  const locale = useLocale();
+  const locale = useLocale() as 'en' | 'ar';
 
-  const formatDate = (date: Date) => {
-    try {
-      // For Arabic, we'll use a simple format for now
-      if (locale === 'ar') {
-        const d = new Date(date);
-        const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-        return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-      }
-      return format(date, 'MMM d, yyyy');
-    } catch {
-      return date.toLocaleDateString();
-    }
-  };
+  const formatDate = (date: Date) => formatLongDate(date, locale);
 
   const formatPrice = () => {
     if (event.price === 'free') return t('free');

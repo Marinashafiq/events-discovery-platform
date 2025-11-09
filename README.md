@@ -118,6 +118,7 @@ events-discovery-platform/
 │   │   └── tickets.ts           # Ticket operations
 │   └── utils/                   # Utility functions
 │       ├── blurPlaceholder.ts   # Blur placeholder generator for Next.js Image
+│       ├── dateFormat.ts        # Locale-aware date formatting utilities
 │       ├── metadata.ts          # Reusable metadata generator
 │       ├── structuredData.ts    # Reusable schema.org structured data builders
 │       └── ticketPrint.ts       # Ticket printing utility
@@ -201,6 +202,9 @@ The project includes several reusable utility modules:
   - `buildCollectionPageSchema()` - Events listing page schema
   - `buildTicketsCollectionPageSchema()` - Tickets listing page schema
   - Helper functions for Place, Organization, and Offer schemas
+- **`lib/utils/dateFormat.ts`**: Locale-aware date formatting utilities using date-fns:
+  - `formatLongDate()` - Long date with day name (e.g., "Monday, January 15, 2024")
+  - `formatTime()` - 12-hour time format (e.g., "2:30 PM")
 - **`lib/utils/blurPlaceholder.ts`**: Blur placeholder generator for Next.js Image components to improve perceived performance
 - **`lib/utils/ticketPrint.ts`**: Ticket printing functionality
 

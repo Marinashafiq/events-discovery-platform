@@ -2,12 +2,12 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import { format } from 'date-fns';
 import { getEventBySlug } from '@/lib/api/events';
 import { Link as I18nLink } from '@/i18n/routing';
 import { generatePageMetadata } from '@/lib/utils/metadata';
 import { buildEventSchema } from '@/lib/utils/structuredData';
 import { getBlurDataURL } from '@/lib/utils/blurPlaceholder';
+import { formatLongDate, formatTime } from '@/lib/utils/dateFormat';
 
 interface EventDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -54,35 +54,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
     notFound();
   }
 
-  const formatDate = (date: Date) => {
-    try {
-      if (locale === 'ar') {
-        const d = new Date(date);
-        const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-        const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-        return `${days[d.getDay()]}، ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-      }
-      return format(date, 'EEEE, MMMM d, yyyy');
-    } catch {
-      return date.toLocaleDateString();
-    }
-  };
-
-  const formatTime = (date: Date) => {
-    try {
-      if (locale === 'ar') {
-        const d = new Date(date);
-        const hours = d.getHours();
-        const minutes = d.getMinutes();
-        const ampm = hours >= 12 ? 'م' : 'ص';
-        const displayHours = hours % 12 || 12;
-        return `${displayHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-      }
-      return format(date, 'h:mm a');
-    } catch {
-      return date.toLocaleTimeString();
-    }
-  };
+  const formatDate = (date: Date) => formatLongDate(date, locale as 'en' | 'ar');
+  const formatTimeDisplay = (date: Date) => formatTime(date, locale as 'en' | 'ar');
 
   const formatPrice = () => {
     if (event.price === 'free') return t('free');
@@ -134,7 +107,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                 blurDataURL={getBlurDataURL()}
               />
               {event.featured && (
-                <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded text-sm font-semibold">
                   Featured
                 </div>
               )}
@@ -159,9 +132,9 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       <span className="font-medium">{t('time')}:</span>
-                      <span className="ml-2 rtl:ml-0 rtl:mr-2">{formatTime(event.date)}</span>
+                      <span className="ml-2 rtl:ml-0 rtl:mr-2">{formatTimeDisplay(event.date)}</span>
                       {event.endDate && (
-                        <span className="ml-1 rtl:ml-0 rtl:mr-1">- {formatTime(event.endDate)}</span>
+                        <span className="ml-1 rtl:ml-0 rtl:mr-1">- {formatTimeDisplay(event.endDate)}</span>
                       )}
                     </div>
                     <div className="flex items-center">
