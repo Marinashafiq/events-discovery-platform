@@ -101,27 +101,11 @@ export default async function EventsPage({ params, searchParams }: EventsPagePro
             
             <div className="prose prose-lg dark:prose-invert max-w-none mb-8">
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                Welcome to our comprehensive events platform where you can <strong>discover events</strong> happening near you and around the world. Whether you're looking for concerts, conferences, workshops, cultural festivals, or business networking events, our platform makes it easy to find and book tickets for the best <strong>upcoming events</strong> in your area.
-              </p>
-
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                Our <strong>events platform</strong> features a diverse collection of events across multiple categories including technology, music, arts, sports, business, education, and entertainment. Each event listing provides detailed information about the date, time, location, pricing, and organizer, helping you make informed decisions when choosing which events to attend.
-              </p>
-
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                To help you <strong>discover events</strong> that match your interests, we've built powerful search and filtering tools. Use the search bar to find events by name, or apply filters to narrow down results by category, location, or date range. You can filter events by specific categories like technology conferences, music festivals, or business workshops, making it simple to find exactly what you're looking for.
-              </p>
-
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                Once you've found an event that interests you, booking tickets is quick and straightforward. Simply click on any event card to view full details, including the event description, venue information, ticket pricing, and availability. Our secure booking system ensures your ticket purchase is safe and reliable, and you'll receive instant confirmation via email.
-              </p>
-
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                We regularly update our platform with new events, so there's always something exciting to discover. From free community gatherings to premium exclusive events, our platform caters to all interests and budgets. Whether you're planning a weekend activity, looking for professional development opportunities, or seeking entertainment options, you'll find a wide variety of events to choose from.
+                {t('introParagraphStart')} <strong>{t('introParagraphDiscover')}</strong> {t('introParagraphMiddle')} <strong>{t('introParagraphUpcoming')}</strong> {t('introParagraphEnd')}
               </p>
 
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                Start exploring our curated selection of events below. Use the search and filter options to refine your results, and don't forget to check back regularly as we add new events daily. Join thousands of event-goers who use our platform to discover and book tickets for memorable experiences.
+                {t('outroParagraph')}
               </p>
             </div>
           </div>

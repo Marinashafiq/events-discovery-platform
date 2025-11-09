@@ -29,6 +29,12 @@
     "featuredEvents": "Featured Events",
     "allEvents": "All Events",
     "searchPlaceholder": "Search by event name...",
+    "introParagraphStart": "Welcome to our comprehensive events platform where you can",
+    "introParagraphMiddle": "happening near you and around the world. Whether you're looking for concerts, conferences, workshops, cultural festivals, or business networking events, our platform makes it easy to find and book tickets for the best",
+    "introParagraphEnd": "in your area.",
+    "introParagraphDiscover": "discover events",
+    "introParagraphUpcoming": "upcoming events",
+    "outroParagraph": "Start exploring our curated selection of events below. Use the search and filter options to refine your results, and don't forget to check back regularly as we add new events daily. Join thousands of event-goers who use our platform to discover and book tickets for memorable experiences.",
     "filters": {
       "title": "Filters",
       "category": "Category",
