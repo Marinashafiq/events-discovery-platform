@@ -159,7 +159,6 @@ events-discovery-platform/
 - **Sitemap**: Dynamic sitemap.xml generated from event data
 - **Robots.txt**: Proper crawling rules configured
 - **Open Graph & Twitter Cards**: Social media preview support
-- **Apple Touch Icon**: Proper iOS home screen icon support
 
 ### Internationalization
 
