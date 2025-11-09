@@ -117,6 +117,7 @@ events-discovery-platform/
 │   │   ├── events.ts            # Event data fetching and filtering
 │   │   └── tickets.ts           # Ticket operations
 │   └── utils/                   # Utility functions
+│       ├── blurPlaceholder.ts   # Blur placeholder generator for Next.js Image
 │       ├── metadata.ts          # Reusable metadata generator
 │       ├── structuredData.ts    # Reusable schema.org structured data builders
 │       └── ticketPrint.ts       # Ticket printing utility
@@ -187,7 +188,7 @@ events-discovery-platform/
 
 The project uses TypeScript with strict mode enabled. All components, functions, and data structures are fully typed. No `any` types are used.
 
-## Code Organization
+## Translation and Utilis 
 
 ### Reusable Utilities
 
@@ -200,6 +201,7 @@ The project includes several reusable utility modules:
   - `buildCollectionPageSchema()` - Events listing page schema
   - `buildTicketsCollectionPageSchema()` - Tickets listing page schema
   - Helper functions for Place, Organization, and Offer schemas
+- **`lib/utils/blurPlaceholder.ts`**: Blur placeholder generator for Next.js Image components to improve perceived performance
 - **`lib/utils/ticketPrint.ts`**: Ticket printing functionality
 
 ### Translation Structure

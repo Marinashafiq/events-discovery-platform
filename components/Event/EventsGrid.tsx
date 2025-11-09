@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { EventsResponse, EventFilters, Event } from '@/types/event';
+import { EventsResponse, EventFilters } from '@/types/event';
 import { getEvents } from '@/lib/api/events';
 import EventCard from './EventCard';
-import LoadingSkeleton from '../LoadingSkeleton';
 
 interface EventsGridProps {
   initialEvents: EventsResponse;
@@ -15,13 +14,18 @@ interface EventsGridProps {
 
 export default function EventsGrid({ initialEvents, initialFilters, initialPage }: EventsGridProps) {
   const t = useTranslations('common');
-  const [allEvents, setAllEvents] = useState<Event[]>(initialEvents.events);
+  // Use server-provided events directly, no client-side refetch on filter changes
+  const [allEvents, setAllEvents] = useState(initialEvents.events);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(initialEvents.page < initialEvents.totalPages);
-  const [totalPages, setTotalPages] = useState(initialEvents.totalPages);
-  const prevFiltersRef = useRef<string>(JSON.stringify(initialFilters));
+
+  // Sync with server-provided data when filters change (server re-renders with new data)
+  useEffect(() => {
+    setAllEvents(initialEvents.events);
+    setCurrentPage(initialPage);
+    setHasMore(initialEvents.page < initialEvents.totalPages);
+  }, [initialEvents, initialPage]);
 
   // Normalize filters to handle empty strings as undefined
   const normalizeFilters = (f: EventFilters): EventFilters => {
@@ -35,34 +39,7 @@ export default function EventsGrid({ initialEvents, initialFilters, initialPage 
     return normalized;
   };
 
-  // Reload events when filters change (from URL)
-  useEffect(() => {
-    const normalizedInitial = normalizeFilters(initialFilters);
-    const normalizedInitialStr = JSON.stringify(normalizedInitial);
-    
-    // Only reload if filters actually changed
-    if (prevFiltersRef.current !== normalizedInitialStr) {
-      prevFiltersRef.current = normalizedInitialStr;
-      
-      async function loadEvents() {
-        setLoading(true);
-        try {
-          const data = await getEvents(normalizedInitial, { page: 1, limit: 6 });
-          setAllEvents(data.events);
-          setCurrentPage(1);
-          setHasMore(data.page < data.totalPages);
-          setTotalPages(data.totalPages);
-        } catch (error) {
-          console.error('Error loading events:', error);
-        } finally {
-          setLoading(false);
-        }
-      }
-      
-      loadEvents();
-    }
-  }, [initialFilters]);
-
+  // Only client-side refetch for "Load More" pagination
   const handleLoadMore = async () => {
     if (loadingMore || !hasMore) return;
 
@@ -80,14 +57,6 @@ export default function EventsGrid({ initialEvents, initialFilters, initialPage 
       setLoadingMore(false);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <LoadingSkeleton variant="card" count={6} />
-      </div>
-    );
-  }
 
   if (allEvents.length === 0) {
     return (

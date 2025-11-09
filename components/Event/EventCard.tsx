@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { Event } from '@/types/event';
 import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { getBlurDataURL } from '@/lib/utils/blurPlaceholder';
 
 interface EventCardProps {
   event: Event;
@@ -45,6 +46,8 @@ export default function EventCard({ event }: EventCardProps) {
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL={getBlurDataURL()}
           />
           {event.featured && (
             <div className="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded text-xs font-semibold">

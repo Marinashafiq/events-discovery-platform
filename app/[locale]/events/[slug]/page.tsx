@@ -7,6 +7,7 @@ import { getEventBySlug } from '@/lib/api/events';
 import { Link as I18nLink } from '@/i18n/routing';
 import { generatePageMetadata } from '@/lib/utils/metadata';
 import { buildEventSchema } from '@/lib/utils/structuredData';
+import { getBlurDataURL } from '@/lib/utils/blurPlaceholder';
 
 interface EventDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -129,6 +130,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                 className="object-cover"
                 priority
                 sizes="100vw"
+                placeholder="blur"
+                blurDataURL={getBlurDataURL()}
               />
               {event.featured && (
                 <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
